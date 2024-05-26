@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id Int @id @default(autoincrement())
+
+  preferredCurrency Currency
+  expenses          Expense[]
+
+  createdAt DateTime @default(dbgenerated("NOW()")) @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+}
+
+model Expense {
+  id        Int             @id @default(autoincrement())
+  user      User            @relation(fields: [userId], references: [id])
+  userId    Int
+  sum       Float
+  currency  Currency        @default(BYN)
+  category  ExpenseCategory
+  createdAt DateTime        @default(dbgenerated("NOW()")) @db.Timestamptz(3)
+  updatedAt DateTime        @updatedAt @db.Timestamptz(3)
+}
+
+enum Currency {
+  USD // Доллар США
+  EUR // Евро
+  JPY // Японская иена
+  GBP // Британский фунт стерлингов
+  AUD // Австралийский доллар
+  CAD // Канадский доллар
+  CHF // Швейцарский франк
+  CNY // Китайский юань
+  HKD // Гонконгский доллар
+  NZD // Новозеландский доллар
+  SEK // Шведская крона
+  KRW // Южнокорейская вона
+  SGD // Сингапурский доллар
+  NOK // Норвежская крона
+  MXN // Мексиканский песо
+  INR // Индийская рупия
+  RUB // Российский рубль
+  ZAR // Южноафриканский рэнд
+  TRY // Турецкая лира
+  BRL // Бразильский реал
+  TWD // Новый тайваньский доллар
+  DKK // Датская крона
+  PLN // Польский злотый
+  THB // Тайский бат
+  MYR // Малайзийский ринггит
+  IDR // Индонезийская рупия
+  HUF // Венгерский форинт
+  CZK // Чешская крона
+  ILS // Израильский шекель
+  CLP // Чилийский песо
+  PHP // Филиппинское песо
+  AED // Дирхам ОАЭ
+  COP // Колумбийский песо
+  SAR // Саудовский риял
+  RON // Румынский лей
+  BGN // Болгарский лев
+  KZT // Казахстанский тенге
+  BYN // Белорусский рубль
+}
+
+enum ExpenseCategory {
+  GROCERIES // Продукты питания
+  DINING_OUT // Рестораны и кафе
+  HOUSING // Жилье
+  UTILITIES // Коммунальные услуги
+  TRANSPORTATION // Транспорт
+  CAR_EXPENSES // Автомобильные расходы
+  INSURANCE // Страхование
+  HEALTHCARE // Медицина и здоровье
+  MEDICATIONS // Лекарства
+  CLOTHING_FOOTWEAR // Одежда и обувь
+  ENTERTAINMENT // Развлечения и досуг
+  FITNESS_SPORTS // Фитнес и спорт
+  TRAVEL // Путешествия
+  EDUCATION // Образование
+  PETS // Домашние животные
+  GIFTS_DONATIONS // Подарки и пожертвования
+  LOANS_DEBTS // Кредиты и долги
+  INVESTMENTS_SAVINGS // Инвестиции и сбережения
+  COMMUNICATION_INTERNET // Связь и интернет
+  MISCELLANEOUS // Разные расходы
+}

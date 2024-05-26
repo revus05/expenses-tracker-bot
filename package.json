@@ -1,0 +1,22 @@
+{
+  "name": "expenses-tracker-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@grammyjs/hydrate": "^1.4.1",
+    "@prisma/client": "^5.14.0",
+    "grammy": "^1.23.0",
+    "nodemon": "^3.1.0",
+    "prisma": "^5.14.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "typescript": "^5.4.5"
+  }
+}
