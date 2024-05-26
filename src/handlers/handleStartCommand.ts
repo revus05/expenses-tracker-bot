@@ -1,8 +1,8 @@
-import { CommandContext, Context } from 'grammy'
+import { CommandContext } from 'grammy'
 import { User } from '@prisma/client'
 import prisma from '../../prisma/client/prismaClient'
-import { MyContext } from '../index'
 import checkIsUserRegistered from '../queries/checkIsUserRegistered'
+import { MyContext } from '../utils/bot'
 
 type HandleStartCommand = (ctx: CommandContext<MyContext>) => Promise<void>
 

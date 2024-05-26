@@ -1,13 +1,8 @@
-import { Bot, Context } from 'grammy'
 import handleStartCommand from './handlers/handleStartCommand'
 import handleTextMessage from './handlers/handleTextMessage'
 import handleVoiceMessage from './handlers/handleVoiceMessage'
 import handleInlineKeyboardClick from './handlers/handleInlineKeyboardClick'
-import { hydrate, HydrateFlavor } from '@grammyjs/hydrate'
-
-export type MyContext = HydrateFlavor<Context>
-const bot = new Bot<MyContext>(process.env.BOT_TOKEN || '')
-bot.use(hydrate())
+import bot from './utils/bot'
 
 export type UserState = {
   firstNumber?: number

@@ -1,46 +1,33 @@
-import getCategoryValue from "../utils/getCategoryValue";
-import { MyContext, UserState } from "../index";
-import { Expense, ExpenseCategory } from "@prisma/client";
-import prisma from "../../prisma/client/prismaClient";
-import getAddedNewExpenseText from "../replies/addedNewExpense";
+import getCategoryValue from '../utils/getCategoryValue'
+import { Expense } from '@prisma/client'
+import getAddedNewExpenseText from '../replies/addedNewExpense'
+import { UserState } from '../index'
+import { MyContext } from '../utils/bot'
+import createExpense from '../queries/createExpense'
+import { Category } from '../types/categories'
+import countTotalUserExpenses from '../queries/countTotalUserExpenses'
 
-type HandleInlineKeyboardClick = (
-  ctx: MyContext,
-  userStates: Record<number, UserState>,
-) => Promise<void>;
+type HandleInlineKeyboardClick = (ctx: MyContext, userStates: Record<number, UserState>) => Promise<void>
 
-const handleInlineKeyboardClick: HandleInlineKeyboardClick = async (
-  ctx,
-  userStates,
-) => {
-  await ctx.answerCallbackQuery(
-    `Выбрано: ${getCategoryValue(ctx.callbackQuery?.data)}`,
-  );
-
-  if (userStates[ctx.from?.id || 0].firstNumber) {
-    const expense: Expense = await prisma.expense.create({
-      data: {
-        sum: userStates[ctx.from?.id || 0].firstNumber || 0,
-        userId: ctx.from?.id || 0,
-        category: ctx.callbackQuery?.data as ExpenseCategory,
-      },
-    });
-    const total = await prisma.expense.aggregate({
-      _sum: {
-        sum: true,
-      },
-      where: {
-        userId: ctx.from?.id,
-      },
-    });
-    await ctx.callbackQuery?.message?.editText(
-      await getAddedNewExpenseText(expense, total._sum.sum || 0),
-      {
-        reply_markup: undefined,
-      },
-    );
-    userStates[ctx.from?.id || 0].firstNumber = 0;
+const handleInlineKeyboardClick: HandleInlineKeyboardClick = async (ctx, userStates) => {
+  if (
+    !ctx.from ||
+    !ctx.from.id ||
+    !ctx.callbackQuery ||
+    !ctx.callbackQuery.data ||
+    !userStates[ctx.from.id].firstNumber
+  ) {
+    await ctx.reply('Error no data.')
+    return
   }
-};
 
-export default handleInlineKeyboardClick;
+  const id = ctx.from.id
+  await ctx.answerCallbackQuery(`Выбрано: ${getCategoryValue(ctx.callbackQuery.data)}`)
+
+  const expense: Expense = await createExpense(userStates[id].firstNumber || 0, id, ctx.callbackQuery.data as Category)
+  const total = await countTotalUserExpenses(id)
+  await ctx.callbackQuery?.message?.editText(await getAddedNewExpenseText(expense, total))
+  userStates[id].firstNumber = 0
+}
+
+export default handleInlineKeyboardClick
