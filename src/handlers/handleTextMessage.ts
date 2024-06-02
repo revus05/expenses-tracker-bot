@@ -4,6 +4,7 @@ import getCategoryText from '../utils/getCategoryText'
 import createExpense from '../queries/createExpense'
 import getAICategoryPrediction from '../queries/getAICategoryPrediction'
 import { Expense } from '@prisma/client'
+import getMoneyWithSymbol from '../utils/getMoneyWithSymbol'
 
 type HandleTextMessage = (ctx: MyContext) => Promise<void>
 
@@ -27,7 +28,7 @@ const handleTextMessage: HandleTextMessage = async ctx => {
   const AICategoryPrediction = await getAICategoryPrediction(ctx.message.text)
 
   const inlineKeyboard = getCategoryKeyboard(expense.id)
-  await ctx.reply('Добавьте категорию: ', {
+  await ctx.reply(`Добавьте категорию для траты в ${getMoneyWithSymbol(expense.currency, expense.sum)}: `, {
     reply_markup: AICategoryPrediction
       ? inlineKeyboard
           .row()
