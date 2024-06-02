@@ -1,6 +1,6 @@
-import { Category } from '../types/categories'
+import { $Enums } from '@prisma/client'
 
-const categories: Category[] = [
+const categories: $Enums.ExpenseCategory[] = [
   'GROCERIES',
   'DINING_OUT',
   'HOUSING',

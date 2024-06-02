@@ -10,7 +10,7 @@ datasource db {
 model User {
   id Int @id @default(autoincrement())
 
-  preferredCurrency Currency
+  preferredCurrency Currency  @default(BYN)
   expenses          Expense[]
 
   createdAt DateTime @default(dbgenerated("NOW()")) @db.Timestamptz(3)
@@ -18,14 +18,15 @@ model User {
 }
 
 model Expense {
-  id        Int             @id @default(autoincrement())
-  user      User            @relation(fields: [userId], references: [id])
-  userId    Int
-  sum       Float
-  currency  Currency        @default(BYN)
-  category  ExpenseCategory
-  createdAt DateTime        @default(dbgenerated("NOW()")) @db.Timestamptz(3)
-  updatedAt DateTime        @updatedAt @db.Timestamptz(3)
+  id          Int              @id @default(autoincrement())
+  user        User             @relation(fields: [userId], references: [id])
+  userId      Int
+  sum         Float
+  currency    Currency         @default(BYN)
+  category    ExpenseCategory?
+  description String?
+  createdAt   DateTime         @default(dbgenerated("NOW()")) @db.Timestamptz(3)
+  updatedAt   DateTime         @updatedAt @db.Timestamptz(3)
 }
 
 enum Currency {

@@ -1,6 +1,6 @@
-import { Category } from '../types/categories'
+import { $Enums } from '@prisma/client'
 
-const categories = new Map<Category | string | '', string>()
+const categories = new Map<$Enums.ExpenseCategory | string | '', string>()
 categories.set('GROCERIES', '🍎 Продукты')
 categories.set('DINING_OUT', '🍽️ Рестораны и кафе')
 categories.set('HOUSING', '🏠 Жилье')
@@ -22,10 +22,10 @@ categories.set('INVESTMENTS_SAVINGS', '💰 Инвестиции и сбереж
 categories.set('COMMUNICATION_INTERNET', '📱 Связь и интернет')
 categories.set('MISCELLANEOUS', '🔍 Разные расходы')
 
-type GetCategoryValue = (category: Category | string | undefined) => string
+type GetCategoryValue = (category: $Enums.ExpenseCategory | string | undefined | null) => string
 
-const getCategoryValue: GetCategoryValue = category => {
+const getCategoryText: GetCategoryValue = category => {
   return categories.get(category || '') || ''
 }
 
-export default getCategoryValue
+export default getCategoryText

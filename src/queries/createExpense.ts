@@ -1,15 +1,22 @@
-import { Expense, ExpenseCategory } from '@prisma/client'
-import { Category } from '../types/categories'
+import { Currency, Expense } from '@prisma/client'
 import prisma from '../../prisma/client/prismaClient'
 
-type CreateExpense = (sum: number, userId: number, category: Category) => Promise<Expense>
+type CreateExpense = (sum: number, userId: number) => Promise<Expense>
 
-const createExpense: CreateExpense = async (sum, userId, category) => {
+const createExpense: CreateExpense = async (sum, userId) => {
+  const userObj: { preferredCurrency: Currency } | null = await prisma.user.findFirst({
+    where: {
+      id: userId,
+    },
+    select: {
+      preferredCurrency: true,
+    },
+  })
   const expense: Expense = await prisma.expense.create({
     data: {
       sum,
       userId,
-      category,
+      currency: userObj?.preferredCurrency,
     },
   })
   return expense

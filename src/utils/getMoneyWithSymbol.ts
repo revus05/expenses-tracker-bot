@@ -1,6 +1,7 @@
 import currencies from '../data/currencies'
+import { $Enums } from '@prisma/client'
 
-const getMoneyValue = (currencyCode: string, sum: number): string => {
+const getMoneyWithSymbol = (currencyCode: $Enums.Currency, sum: number): string => {
   if (
     currencyCode == 'USD' ||
     currencyCode == 'EUR' ||
@@ -18,4 +19,4 @@ const getMoneyValue = (currencyCode: string, sum: number): string => {
   }
 }
 
-export default getMoneyValue
+export default getMoneyWithSymbol

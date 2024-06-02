@@ -1,17 +1,17 @@
 import { Expense } from '@prisma/client'
-import getMoneyValue from '../utils/getMoneyValue'
-import getCategoryValue from '../utils/getCategoryValue'
-import getTotalSumForCategory from '../queries/getTotalSumForCategory'
+import getMoneyWithSymbol from '../utils/getMoneyWithSymbol'
+import getCategoryText from '../utils/getCategoryText'
+import getTotalSum from '../queries/getTotalSum'
 
-type GetAddedNewExpenseText = (expense: Expense, totalSum: number) => Promise<string>
+type GetAddedNewExpenseText = (expense: Expense) => Promise<string>
 
-const getAddedNewExpenseText: GetAddedNewExpenseText = async (expense, totalSum) => {
+const getAddedNewExpenseText: GetAddedNewExpenseText = async (expense: Expense) => {
   return `✅ Успешно!
-Добавлено: ${getMoneyValue(expense.currency, expense.sum)} в кат. ${getCategoryValue(expense.category)}
+Добавлено: ${getMoneyWithSymbol(expense.currency, expense.sum)} в кат. ${getCategoryText(expense.category)}
 
 Статистика за последний месяц:
-${getCategoryValue(expense.category)}: ${getMoneyValue(expense.currency, (await getTotalSumForCategory(expense.category, expense.userId)) || 0)}
-💰 Общие расходы: ${getMoneyValue(expense.currency, totalSum)}`
+${getCategoryText(expense.category)}: ${await getTotalSum(expense.userId, expense.category)}
+💰 Общие расходы: ${await getTotalSum(expense.userId)}`
 }
 
 export default getAddedNewExpenseText
