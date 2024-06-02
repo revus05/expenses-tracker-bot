@@ -1,4 +1,4 @@
-import { MyContext } from '../../utils/bot'
+import { MyContext } from '../../utils/init/bot'
 import prisma from '../../../prisma/client/prismaClient'
 import { Currency, User } from '@prisma/client'
 import preferredCurrencySelected from '../../replies/preferredCurrencySelected'

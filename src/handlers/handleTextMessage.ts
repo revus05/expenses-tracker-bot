@@ -1,5 +1,5 @@
 import getCategoryKeyboard from '../utils/getCategoryKeyboard'
-import { MyContext } from '../utils/bot'
+import { MyContext } from '../utils/init/bot'
 import getCategoryText from '../utils/getCategoryText'
 import createExpense from '../queries/createExpense'
 import getAICategoryPrediction from '../queries/getAICategoryPrediction'

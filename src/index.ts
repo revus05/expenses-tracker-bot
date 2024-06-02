@@ -1,16 +1,14 @@
-import bot from './utils/bot'
+import bot from './utils/init/bot'
 import handleStartCommand from './handlers/handleStartCommand'
 import handleTextMessage from './handlers/handleTextMessage'
 import handleVoiceMessage from './handlers/handleVoiceMessage'
 import handleInlineKeyboardClick from './handlers/handleInlineKeyboardClick'
 import handleSetPreferredCurrencyCommand from './handlers/handleSetPreferredCurrencyCommand'
+import setBotCommands from './utils/init/setBotCommands'
 
-bot.api
-  .setMyCommands([
-    { command: 'start', description: 'Начать диалог' },
-    { command: 'set_preferred_currency', description: 'Задать валюту пользователя' },
-  ])
-  .then(() => console.log('Команды для бота добавлены'))
+setBotCommands().then(() => {
+  console.log('Команды бота добавлены')
+})
 
 bot.command('start', handleStartCommand)
 

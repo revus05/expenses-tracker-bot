@@ -1,4 +1,4 @@
-import { MyContext } from '../utils/bot'
+import { MyContext } from '../utils/init/bot'
 import handleAddCategoryCallback from './callbacks/handleAddCategoryCallback'
 import handleSetPreferredCurrencyCallback from './callbacks/handleSetPreferredCurrencyCallback'
 

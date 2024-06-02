@@ -1,4 +1,4 @@
-import { MyContext } from '../utils/bot'
+import { MyContext } from '../utils/init/bot'
 
 type HandleVoiceMessage = (ctx: MyContext) => Promise<void>
 
