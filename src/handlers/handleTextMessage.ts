@@ -23,6 +23,7 @@ const handleTextMessage: HandleTextMessage = async ctx => {
   const expense: Expense = await createExpense(
     Math.round(100 * parseFloat(match[0].replace(',', '.'))) / 100,
     ctx.from.id,
+    match[0].length + 1 < ctx.message.text.length ? ctx.message.text : undefined,
   )
 
   const AICategoryPrediction = await getAICategoryPrediction(ctx.message.text)
@@ -34,7 +35,7 @@ const handleTextMessage: HandleTextMessage = async ctx => {
           .row()
           .text(
             `Рекомендация нейросети: ${getCategoryText(AICategoryPrediction)}`,
-            `addCategory_${AICategoryPrediction}_${expense.id}`,
+            `addCategory-${AICategoryPrediction}-${expense.id}`,
           )
       : inlineKeyboard,
   })

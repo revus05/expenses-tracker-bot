@@ -5,6 +5,7 @@ import handleVoiceMessage from './handlers/handleVoiceMessage'
 import handleInlineKeyboardClick from './handlers/handleInlineKeyboardClick'
 import handleSetPreferredCurrencyCommand from './handlers/handleSetPreferredCurrencyCommand'
 import setBotCommands from './utils/init/setBotCommands'
+import handleListCommand from './handlers/handleListCommand'
 
 setBotCommands().then(() => {
   console.log('Команды бота добавлены')
@@ -13,6 +14,8 @@ setBotCommands().then(() => {
 bot.command('start', handleStartCommand)
 
 bot.command('set_preferred_currency', handleSetPreferredCurrencyCommand)
+
+bot.command('list', handleListCommand)
 
 bot.on('message:text', ctx => handleTextMessage(ctx))
 

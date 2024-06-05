@@ -11,7 +11,9 @@ const getAddedNewExpenseText: GetAddedNewExpenseText = async (expense: Expense) 
 
 Статистика за последний месяц:
 ${getCategoryText(expense.category)}: ${await getTotalSum(expense.userId, expense.category)}
-💰 Общие расходы: ${await getTotalSum(expense.userId)}`
+💰 Общие расходы: ${await getTotalSum(expense.userId)}
+
+/list - Вывести список всех трат`
 }
 
 export default getAddedNewExpenseText

@@ -1,7 +1,8 @@
-import { CommandContext, Context } from 'grammy'
+import { CommandContext } from 'grammy'
 import getCurrencyKeyboard from '../utils/getCurrencyKeyboard'
+import { MyContext } from '../utils/init/bot'
 
-type HandleSetPreferredCurrencyCommand = (ctx: CommandContext<Context>) => Promise<void>
+type HandleSetPreferredCurrencyCommand = (ctx: CommandContext<MyContext>) => Promise<void>
 
 const handleSetPreferredCurrencyCommand: HandleSetPreferredCurrencyCommand = async ctx => {
   const currencyKeyboard = getCurrencyKeyboard()
