@@ -4,9 +4,9 @@ import getDateFormat from '../utils/getDateFormat'
 import getCategoryText from '../utils/getCategoryText'
 import convertNumberToEmoji from '../utils/convertNumberToEmoji'
 
-type ListExpenses = (expenses: Expense[]) => string
+type ListExpenses = (expenses: Expense[], totalSum: string) => string
 
-const listExpenses: ListExpenses = expenses => {
+const listExpenses: ListExpenses = (expenses, totalSum) => {
   let resultString = '📊 Ваши траты:\n\n'
   expenses.forEach((expense: Expense, i) => {
     resultString += `${convertNumberToEmoji(i + 1)} <b>Трата</b>
@@ -16,6 +16,7 @@ const listExpenses: ListExpenses = expenses => {
 📅 <b>Дата:</b> ${getDateFormat(expense.createdAt)}\n\n`
   })
 
+  resultString += `<b>Итоговая сумма за месяц:</b> ${totalSum}`
   return resultString
 }
 

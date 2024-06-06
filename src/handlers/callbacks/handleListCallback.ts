@@ -52,21 +52,13 @@ const handleListCallback: HandleListCallback = async ctx => {
     }
     if (skip + step < totalExpenses) {
       paginationKeyboard.text(
-        totalExpenses - skip - step > step ? `Следущие ${step} >>` : `Последние ${totalExpenses - skip - step}`,
+        totalExpenses - skip - step > step ? `Следущие ${step} >>` : `Последние ${totalExpenses - skip - step} >>`,
         `listNext_${skip + step}`,
       )
     }
   }
 
-  let reply = listExpenses(expenses) + '<b>Итоговая сумма за месяц:</b> '
-  await ctx.callbackQuery.message?.editText(reply, {
-    parse_mode: 'HTML',
-    reply_markup: paginationKeyboard,
-  })
-
-  const totalSum = await getTotalSum(ctx.from.id)
-  reply += totalSum
-
+  let reply = listExpenses(expenses, await getTotalSum(ctx.from.id))
   await ctx.callbackQuery.message?.editText(reply, {
     parse_mode: 'HTML',
     reply_markup: paginationKeyboard,
