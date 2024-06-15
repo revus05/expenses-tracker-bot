@@ -13,7 +13,7 @@ setBotCommands().then(() => {
 
 bot.command('start', handleStartCommand)
 
-bot.command('set_preferred_currency', handleSetPreferredCurrencyCommand)
+bot.command('setPreferredCurrency', handleSetPreferredCurrencyCommand)
 
 bot.command('list', handleListCommand)
 

@@ -1,17 +1,51 @@
 import { MyContext } from '../utils/init/bot'
-import handleAddCategoryCallback from './callbacks/handleAddCategoryCallback'
-import handleSetPreferredCurrencyCallback from './callbacks/handleSetPreferredCurrencyCallback'
-import handleListCallback from './callbacks/handleListCallback'
+import addCategoryCallback from './callbacks/addCategoryCallback'
+import setPreferredCurrencyCallback from './callbacks/setPreferredCurrencyCallback'
+import listCallback from './callbacks/listCallback'
+import expenseCallback from './callbacks/expenseCallback'
+import deleteExpenseCallback from './callbacks/deleteExpenseCallback'
+import updateExpenseSumCallback from './callbacks/updateExpenseSumCallback'
+import updateExpenseCurrencyCallback from './callbacks/updateExpenseCurrencyCallback'
+import updateExpenseChosenCurrencyCallback from './callbacks/updateExpenseChosenCurrencyCallback'
+import updateExpenseCategoryCallback from './callbacks/updateExpenseCategoryCallback'
+import updateExpenseChosenCategoryCallback from './callbacks/updateExpenseChosenCategoryCallback'
+import updateExpenseDescription from './callbacks/updateExpenseDescription'
 
 type HandleInlineKeyboardClick = (ctx: MyContext) => Promise<void>
 
 const handleInlineKeyboardClick: HandleInlineKeyboardClick = async ctx => {
   if (ctx.callbackQuery?.data?.includes(`addCategory`)) {
-    await handleAddCategoryCallback(ctx)
-  } else if (ctx.callbackQuery?.data?.includes(`set_preferred_currency`)) {
-    await handleSetPreferredCurrencyCallback(ctx)
-  } else if (ctx.callbackQuery?.data?.includes(`list`)) {
-    await handleListCallback(ctx)
+    await addCategoryCallback(ctx)
+  }
+  if (ctx.callbackQuery?.data?.includes(`setPreferredCurrency`)) {
+    await setPreferredCurrencyCallback(ctx)
+  }
+  if (ctx.callbackQuery?.data?.includes(`deleteExpense`)) {
+    await deleteExpenseCallback(ctx)
+  }
+  if (ctx.callbackQuery?.data?.includes(`list`)) {
+    await listCallback(ctx)
+  }
+  if (ctx.callbackQuery?.data?.includes(`expense`)) {
+    await expenseCallback(ctx)
+  }
+  if (ctx.callbackQuery?.data?.includes(`updateExpenseSum`)) {
+    await updateExpenseSumCallback(ctx)
+  }
+  if (ctx.callbackQuery?.data?.includes(`updateExpenseDescription`)) {
+    await updateExpenseDescription(ctx)
+  }
+  if (ctx.callbackQuery?.data?.includes(`updateExpenseCurrency`)) {
+    await updateExpenseCurrencyCallback(ctx)
+  }
+  if (ctx.callbackQuery?.data?.includes(`updateExpenseChosenCurrency`)) {
+    await updateExpenseChosenCurrencyCallback(ctx)
+  }
+  if (ctx.callbackQuery?.data?.includes(`updateExpenseCategory`)) {
+    await updateExpenseCategoryCallback(ctx)
+  }
+  if (ctx.callbackQuery?.data?.includes(`updateExpenseChosenCategory`)) {
+    await updateExpenseChosenCategoryCallback(ctx)
   }
 }
 

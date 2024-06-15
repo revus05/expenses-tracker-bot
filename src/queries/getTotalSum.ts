@@ -22,7 +22,8 @@ const getTotalSum: GetTotalSumForCategory = async (userId, category) => {
 
   let resultString = ''
   currencies.forEach((sum, currency) => {
-    resultString += `${!resultString ? '' : ' + '}${getMoneyWithSymbol(currency, sum)}`
+    const round = Math.round(100 * sum) / 100
+    resultString += `${!resultString ? '' : ' + '}${getMoneyWithSymbol(currency, round)}`
   })
 
   return resultString

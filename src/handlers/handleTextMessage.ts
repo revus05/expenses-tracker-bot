@@ -1,4 +1,4 @@
-import getCategoryKeyboard from '../utils/getCategoryKeyboard'
+import getCategoryKeyboard from '../utils/keyboards/getCategoryKeyboard'
 import { MyContext } from '../utils/init/bot'
 import getCategoryText from '../utils/getCategoryText'
 import createExpense from '../queries/createExpense'
@@ -28,14 +28,14 @@ const handleTextMessage: HandleTextMessage = async ctx => {
 
   const AICategoryPrediction = await getAICategoryPrediction(ctx.message.text)
 
-  const inlineKeyboard = getCategoryKeyboard(expense.id)
+  const inlineKeyboard = getCategoryKeyboard(`addCategory_${expense.id}`)
   await ctx.reply(`Добавьте категорию для траты в ${getMoneyWithSymbol(expense.currency, expense.sum)}: `, {
     reply_markup: AICategoryPrediction
       ? inlineKeyboard
           .row()
           .text(
             `Рекомендация нейросети: ${getCategoryText(AICategoryPrediction)}`,
-            `addCategory-${AICategoryPrediction}-${expense.id}`,
+            `addCategory_${expense.id}_${AICategoryPrediction}`,
           )
       : inlineKeyboard,
   })

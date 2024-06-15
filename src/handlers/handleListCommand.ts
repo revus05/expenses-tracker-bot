@@ -20,6 +20,9 @@ const handleListCommand: HandleListCommand = async ctx => {
   })
 
   const expenses: Expense[] = await prisma.expense.findMany({
+    orderBy: {
+      createdAt: 'desc',
+    },
     where: {
       userId: ctx.from.id,
     },
@@ -35,14 +38,18 @@ const handleListCommand: HandleListCommand = async ctx => {
     paginationKeyboard = new InlineKeyboard()
     paginationKeyboard.text(
       totalExpenses - step > step ? `Следущие ${step} >>` : `Последние ${totalExpenses - step} >>`,
-      `listNext_${step}`,
+      `listNext`,
     )
   }
 
-  let reply = listExpenses(expenses, await getTotalSum(ctx.from.id))
-  await ctx.reply(reply, {
+  ctx.session.skip = 0
+
+  let reply = listExpenses(expenses, await getTotalSum(ctx.from.id), 0)
+  await ctx.reply(reply.expenses, {
     parse_mode: 'HTML',
-    reply_markup: paginationKeyboard,
+    reply_markup: paginationKeyboard
+      ? new InlineKeyboard([...reply.keyboard.inline_keyboard, ...paginationKeyboard.inline_keyboard])
+      : reply.keyboard,
   })
 }
 

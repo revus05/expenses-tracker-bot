@@ -3,15 +3,15 @@ import prisma from '../../../prisma/client/prismaClient'
 import { Currency, User } from '@prisma/client'
 import preferredCurrencySelected from '../../replies/preferredCurrencySelected'
 
-type HandleSetPreferredCurrencyCallback = (ctx: MyContext) => Promise<void>
+type SetPreferredCurrencyCallback = (ctx: MyContext) => Promise<void>
 
-const handleSetPreferredCurrencyCallback: HandleSetPreferredCurrencyCallback = async ctx => {
+const handleSetPreferredCurrencyCallback: SetPreferredCurrencyCallback = async ctx => {
   const updatedUser: User = await prisma.user.update({
     where: {
       id: ctx.from?.id,
     },
     data: {
-      preferredCurrency: ctx.callbackQuery?.data?.replace('set_preferred_currency_', '') as Currency,
+      preferredCurrency: ctx.callbackQuery?.data?.replace('setPreferredCurrency_', '') as Currency,
     },
   })
   const answer = preferredCurrencySelected(updatedUser.preferredCurrency)
