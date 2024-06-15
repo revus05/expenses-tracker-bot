@@ -16,11 +16,12 @@ const listExpenses: ListExpenses = (expenses, totalSum, skip) => {
   let resultString = '📊 Ваши траты:\n\n'
   const keyboard = new InlineKeyboard()
   expenses.forEach((expense: Expense, i) => {
-    resultString += `${convertNumberToEmoji(i + 1)} <b>Трата</b>
-💰 <b>Сумма:</b> ${getMoneyWithSymbol(expense.currency, expense.sum)}
-🏷 <b>Категория:</b> ${expense.category ? getCategoryText(expense.category) : `<i>Нет категории</i>`}
-📝 <b>Описание:</b> ${expense.description ? expense.description : `<i>Нет описания</i>`}
-📅 <b>Дата:</b> ${getDateFormat(expense.createdAt)}\n\n`
+    resultString +=
+      `${convertNumberToEmoji(i + 1)} <b>Трата</b>\n` +
+      `💰 <b>Сумма:</b> ${getMoneyWithSymbol(expense.currency, expense.sum)}\n` +
+      `🏷 <b>Категория:</b> ${expense.category ? getCategoryText(expense.category) : `<i>Нет категории</i>`}\n` +
+      `📝 <b>Описание:</b> ${expense.description ? expense.description : `<i>Нет описания</i>`}\n` +
+      `📅 <b>Дата:</b> ${getDateFormat(expense.createdAt)}\n\n`
 
     keyboard.text(`${i + 1}`, `expense_${expense.id}`)
   })

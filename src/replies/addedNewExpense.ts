@@ -6,14 +6,14 @@ import getTotalSum from '../queries/getTotalSum'
 type GetAddedNewExpenseText = (expense: Expense) => Promise<string>
 
 const getAddedNewExpenseText: GetAddedNewExpenseText = async (expense: Expense) => {
-  return `✅ Успешно!
-Добавлено: ${getMoneyWithSymbol(expense.currency, expense.sum)} в кат. ${getCategoryText(expense.category)}
-
-Статистика за последний месяц:
-${getCategoryText(expense.category)}: ${await getTotalSum(expense.userId, expense.category)}
-💰 Общие расходы: ${await getTotalSum(expense.userId)}
-
-/list - Вывести список всех трат`
+  return (
+    `✅ Успешно!\n` +
+    `Добавлено: ${getMoneyWithSymbol(expense.currency, expense.sum)} в кат. ${getCategoryText(expense.category)}\n` +
+    `Статистика за последний месяц:\n` +
+    `${getCategoryText(expense.category)}: ${await getTotalSum(expense.userId, expense.category)}\n` +
+    `💰 Общие расходы: ${await getTotalSum(expense.userId)}\n\n` +
+    `/list - Вывести список всех трат`
+  )
 }
 
 export default getAddedNewExpenseText
