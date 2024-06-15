@@ -4,6 +4,7 @@ import getCategoryText from '../../utils/getCategoryText'
 import getAddedNewExpenseText from '../../replies/addedNewExpense'
 import { MyContext } from '../../utils/init/bot'
 import findAllOccurrences from '../../utils/findAllOccurrences'
+import getMoneyWithSymbol from '../../utils/getMoneyWithSymbol'
 
 type AddCategoryCallback = (ctx: MyContext) => Promise<void>
 
@@ -26,7 +27,10 @@ const handleAddCategoryCallback: AddCategoryCallback = async ctx => {
     },
   })
 
-  await ctx.answerCallbackQuery(`Выбрано: ${getCategoryText(ctx.callbackQuery.data)}`)
+  await ctx.answerCallbackQuery(
+    `✅ Успешно!\n` +
+      `Добавлено: ${getMoneyWithSymbol(updatedExpense.currency, updatedExpense.sum)} в кат. ${getCategoryText(category)}`,
+  )
 
   await ctx.callbackQuery?.message?.editText(await getAddedNewExpenseText(updatedExpense))
 }

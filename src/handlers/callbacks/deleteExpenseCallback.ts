@@ -24,7 +24,7 @@ const handleDeleteExpenseCallback: DeleteExpenseCallback = async ctx => {
     },
   })
 
-  await ctx.answerCallbackQuery('Удалено!')
+  await ctx.answerCallbackQuery('❌ Трата удалена!')
 }
 
 export default handleDeleteExpenseCallback
