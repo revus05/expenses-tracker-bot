@@ -1,12 +1,12 @@
-import { CommandContext, InlineKeyboard } from 'grammy'
+import { InlineKeyboard } from 'grammy'
 import { MyContext } from '../utils/init/bot'
 import { Expense } from '@prisma/client'
 import prisma from '../../prisma/client/prismaClient'
-import listExpenses from '../replies/listExpenses'
+import listExpenses from '../replies/expenses/listExpenses'
 import getTotalSum from '../queries/getTotalSum'
 import { step } from '../utils/init/config'
 
-type HandleListCommand = (ctx: CommandContext<MyContext>) => Promise<void>
+type HandleListCommand = (ctx: MyContext) => Promise<void>
 
 const handleListCommand: HandleListCommand = async ctx => {
   if (!ctx.from) {

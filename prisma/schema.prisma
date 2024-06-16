@@ -10,11 +10,26 @@ datasource db {
 model User {
   id Int @id @default(autoincrement())
 
-  preferredCurrency Currency  @default(BYN)
+  preferredCurrency Currency          @default(BYN)
   expenses          Expense[]
+  periodicExpenses  PeriodicExpense[]
 
   createdAt DateTime @default(dbgenerated("NOW()")) @db.Timestamptz(3)
   updatedAt DateTime @updatedAt @db.Timestamptz(3)
+}
+
+model PeriodicExpense {
+  id          Int              @id @default(autoincrement())
+  user        User             @relation(fields: [userId], references: [id])
+  userId      Int
+  periodDays  Int
+  sum         Float
+  currency    Currency         @default(BYN)
+  name        String
+  category    ExpenseCategory?
+  description String?
+  createdAt   DateTime         @default(dbgenerated("NOW()")) @db.Timestamptz(3)
+  updatedAt   DateTime         @updatedAt @db.Timestamptz(3)
 }
 
 model Expense {

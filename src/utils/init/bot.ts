@@ -2,8 +2,9 @@ import { hydrate, HydrateFlavor } from '@grammyjs/hydrate'
 import { Bot, Context, session, SessionFlavor } from 'grammy'
 import { config } from 'dotenv'
 import { ConversationFlavor, conversations, createConversation } from '@grammyjs/conversations'
-import updateExpenseSumConversation from '../../conversations/updateExpenseSumConversation'
-import updateExpenseDescriptionConversation from '../../conversations/updateExpenseDescriptionConversation'
+import updateExpenseSumConversation from '../../conversations/expenses/updateExpenseSumConversation'
+import updateExpenseDescriptionConversation from '../../conversations/expenses/updateExpenseDescriptionConversation'
+import addPeriodicExpenseConversation from '../../conversations/periodicExpenses/addPeriodicExpenseConversation'
 config()
 
 type Session = {
@@ -21,5 +22,6 @@ bot.use(conversations())
 
 bot.use(createConversation(updateExpenseSumConversation))
 bot.use(createConversation(updateExpenseDescriptionConversation))
+bot.use(createConversation(addPeriodicExpenseConversation))
 
 export default bot

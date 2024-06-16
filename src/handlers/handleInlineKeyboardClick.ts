@@ -1,15 +1,16 @@
 import { MyContext } from '../utils/init/bot'
-import addCategoryCallback from './callbacks/addCategoryCallback'
+import addCategoryCallback from './callbacks/expenses/addCategoryCallback'
 import setPreferredCurrencyCallback from './callbacks/setPreferredCurrencyCallback'
-import listCallback from './callbacks/listCallback'
-import expenseCallback from './callbacks/expenseCallback'
-import deleteExpenseCallback from './callbacks/deleteExpenseCallback'
-import updateExpenseSumCallback from './callbacks/updateExpenseSumCallback'
-import updateExpenseCurrencyCallback from './callbacks/updateExpenseCurrencyCallback'
-import updateExpenseChosenCurrencyCallback from './callbacks/updateExpenseChosenCurrencyCallback'
-import updateExpenseCategoryCallback from './callbacks/updateExpenseCategoryCallback'
-import updateExpenseChosenCategoryCallback from './callbacks/updateExpenseChosenCategoryCallback'
-import updateExpenseDescription from './callbacks/updateExpenseDescription'
+import listCallback from './callbacks/expenses/listCallback'
+import expenseCallback from './callbacks/expenses/expenseCallback'
+import deleteExpenseCallback from './callbacks/expenses/deleteExpenseCallback'
+import updateExpenseSumCallback from './callbacks/expenses/updateExpenseSumCallback'
+import updateExpenseCurrencyCallback from './callbacks/expenses/updateExpenseCurrencyCallback'
+import updateExpenseChosenCurrencyCallback from './callbacks/expenses/updateExpenseChosenCurrencyCallback'
+import updateExpenseCategoryCallback from './callbacks/expenses/updateExpenseCategoryCallback'
+import updateExpenseChosenCategoryCallback from './callbacks/expenses/updateExpenseChosenCategoryCallback'
+import updateExpenseDescription from './callbacks/expenses/updateExpenseDescription'
+import addPeriodicExpenseCallback from './callbacks/periodicExpenses/addPeriodicExpenseCallback'
 
 type HandleInlineKeyboardClick = (ctx: MyContext) => Promise<void>
 
@@ -46,6 +47,10 @@ const handleInlineKeyboardClick: HandleInlineKeyboardClick = async ctx => {
   }
   if (ctx.callbackQuery?.data?.includes(`updateExpenseChosenCategory`)) {
     await updateExpenseChosenCategoryCallback(ctx)
+  }
+
+  if (ctx.callbackQuery?.data?.includes(`addPeriodicExpense`)) {
+    await addPeriodicExpenseCallback(ctx)
   }
 }
 
