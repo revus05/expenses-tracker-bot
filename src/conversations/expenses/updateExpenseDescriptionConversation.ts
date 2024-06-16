@@ -1,9 +1,9 @@
 import { Conversation } from '@grammyjs/conversations'
-import { MyContext } from '../utils/init/bot'
+import { MyContext } from '../../utils/init/bot'
 import { Expense } from '@prisma/client'
-import prisma from '../../prisma/client/prismaClient'
-import expenseInfo from '../replies/expenseInfo'
-import getExpenseKeyboard from '../utils/keyboards/getExpenseKeyboard'
+import prisma from '../../../prisma/client/prismaClient'
+import expenseInfo from '../../replies/expenses/expenseInfo'
+import getExpenseKeyboard from '../../utils/keyboards/getExpenseKeyboard'
 
 type UpdateExpenseDescriptionConversation = (conversation: Conversation<MyContext>, ctx: MyContext) => Promise<void>
 

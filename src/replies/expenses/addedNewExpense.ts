@@ -1,7 +1,7 @@
 import { Expense } from '@prisma/client'
-import getMoneyWithSymbol from '../utils/getMoneyWithSymbol'
-import getCategoryText from '../utils/getCategoryText'
-import getTotalSum from '../queries/getTotalSum'
+import getMoneyWithSymbol from '../../utils/getMoneyWithSymbol'
+import getCategoryText from '../../utils/getCategoryText'
+import getTotalSum from '../../queries/getTotalSum'
 
 type GetAddedNewExpenseText = (expense: Expense) => Promise<string>
 

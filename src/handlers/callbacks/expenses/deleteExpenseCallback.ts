@@ -1,7 +1,7 @@
-import { MyContext } from '../../utils/init/bot'
-import findAllOccurrences from '../../utils/findAllOccurrences'
-import prisma from '../../../prisma/client/prismaClient'
-import getCommand from '../../utils/getCommand'
+import { MyContext } from '../../../utils/init/bot'
+import findAllOccurrences from '../../../utils/findAllOccurrences'
+import prisma from '../../../../prisma/client/prismaClient'
+import getCommand from '../../../utils/getCommand'
 
 type DeleteExpenseCallback = (ctx: MyContext) => Promise<void>
 

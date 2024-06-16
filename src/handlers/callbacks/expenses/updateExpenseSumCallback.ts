@@ -1,6 +1,6 @@
-import { MyContext } from '../../utils/init/bot'
-import getCommand from '../../utils/getCommand'
-import findAllOccurrences from '../../utils/findAllOccurrences'
+import { MyContext } from '../../../utils/init/bot'
+import getCommand from '../../../utils/getCommand'
+import findAllOccurrences from '../../../utils/findAllOccurrences'
 
 type UpdateExpenseSumCallback = (ctx: MyContext) => Promise<void>
 

@@ -1,8 +1,8 @@
 import { Expense } from '@prisma/client'
-import getMoneyWithSymbol from '../utils/getMoneyWithSymbol'
-import getCategoryText from '../utils/getCategoryText'
-import getDateDayFormat from '../utils/getDateDayFormat'
-import getDateTimeFormat from '../utils/getDateTimeFormat'
+import getMoneyWithSymbol from '../../utils/getMoneyWithSymbol'
+import getCategoryText from '../../utils/getCategoryText'
+import getDateDayFormat from '../../utils/getDateDayFormat'
+import getDateTimeFormat from '../../utils/getDateTimeFormat'
 
 type ExpenseInfo = (expense: Expense) => string
 

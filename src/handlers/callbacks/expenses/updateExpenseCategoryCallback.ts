@@ -1,7 +1,7 @@
-import { MyContext } from '../../utils/init/bot'
-import getCategoryKeyboard from '../../utils/keyboards/getCategoryKeyboard'
-import getCommand from '../../utils/getCommand'
-import findAllOccurrences from '../../utils/findAllOccurrences'
+import { MyContext } from '../../../utils/init/bot'
+import getCategoryKeyboard from '../../../utils/keyboards/getCategoryKeyboard'
+import getCommand from '../../../utils/getCommand'
+import findAllOccurrences from '../../../utils/findAllOccurrences'
 
 type UpdateExpenseCategoryCallback = (ctx: MyContext) => Promise<void>
 

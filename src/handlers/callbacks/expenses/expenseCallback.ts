@@ -1,9 +1,9 @@
-import { MyContext } from '../../utils/init/bot'
-import prisma from '../../../prisma/client/prismaClient'
-import findAllOccurrences from '../../utils/findAllOccurrences'
+import { MyContext } from '../../../utils/init/bot'
+import prisma from '../../../../prisma/client/prismaClient'
+import findAllOccurrences from '../../../utils/findAllOccurrences'
 import { Expense } from '@prisma/client'
-import expenseInfo from '../../replies/expenseInfo'
-import getExpenseKeyboard from '../../utils/keyboards/getExpenseKeyboard'
+import expenseInfo from '../../../replies/expenses/expenseInfo'
+import getExpenseKeyboard from '../../../utils/keyboards/getExpenseKeyboard'
 
 type ExpenseCallback = (ctx: MyContext) => Promise<void>
 

@@ -1,4 +1,4 @@
-import getMoneyWithSymbol from '../utils/getMoneyWithSymbol'
+import getMoneyWithSymbol from '../../utils/getMoneyWithSymbol'
 import { Expense } from '@prisma/client'
 
 type ExpenseSumChanged = (expense: Expense) => string

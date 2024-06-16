@@ -1,11 +1,11 @@
-import { MyContext } from '../../utils/init/bot'
+import { MyContext } from '../../../utils/init/bot'
 import { Expense } from '@prisma/client'
-import prisma from '../../../prisma/client/prismaClient'
-import { step } from '../../utils/init/config'
-import listExpenses from '../../replies/listExpenses'
-import getTotalSum from '../../queries/getTotalSum'
+import prisma from '../../../../prisma/client/prismaClient'
+import { step } from '../../../utils/init/config'
+import listExpenses from '../../../replies/expenses/listExpenses'
+import getTotalSum from '../../../queries/getTotalSum'
 import { InlineKeyboard } from 'grammy'
-import getCommand from '../../utils/getCommand'
+import getCommand from '../../../utils/getCommand'
 
 type ListCallback = (ctx: MyContext) => Promise<void>
 

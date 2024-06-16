@@ -1,7 +1,7 @@
-import { MyContext } from '../../utils/init/bot'
-import getCurrencyKeyboard from '../../utils/keyboards/getCurrencyKeyboard'
-import findAllOccurrences from '../../utils/findAllOccurrences'
-import getCommand from '../../utils/getCommand'
+import { MyContext } from '../../../utils/init/bot'
+import getCurrencyKeyboard from '../../../utils/keyboards/getCurrencyKeyboard'
+import findAllOccurrences from '../../../utils/findAllOccurrences'
+import getCommand from '../../../utils/getCommand'
 
 type UpdateExpenseCurrencyCallback = (ctx: MyContext) => Promise<void>
 

@@ -1,10 +1,10 @@
 import { $Enums, Expense } from '@prisma/client'
-import prisma from '../../../prisma/client/prismaClient'
-import getCategoryText from '../../utils/getCategoryText'
-import getAddedNewExpenseText from '../../replies/addedNewExpense'
-import { MyContext } from '../../utils/init/bot'
-import findAllOccurrences from '../../utils/findAllOccurrences'
-import getMoneyWithSymbol from '../../utils/getMoneyWithSymbol'
+import prisma from '../../../../prisma/client/prismaClient'
+import getCategoryText from '../../../utils/getCategoryText'
+import getAddedNewExpenseText from '../../../replies/expenses/addedNewExpense'
+import { MyContext } from '../../../utils/init/bot'
+import findAllOccurrences from '../../../utils/findAllOccurrences'
+import getMoneyWithSymbol from '../../../utils/getMoneyWithSymbol'
 
 type AddCategoryCallback = (ctx: MyContext) => Promise<void>
 

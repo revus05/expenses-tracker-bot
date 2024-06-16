@@ -1,8 +1,8 @@
 import { Expense } from '@prisma/client'
-import getMoneyWithSymbol from '../utils/getMoneyWithSymbol'
-import getDateFormat from '../utils/getDateDayFormat'
-import getCategoryText from '../utils/getCategoryText'
-import convertNumberToEmoji from '../utils/convertNumberToEmoji'
+import getMoneyWithSymbol from '../../utils/getMoneyWithSymbol'
+import getDateFormat from '../../utils/getDateDayFormat'
+import getCategoryText from '../../utils/getCategoryText'
+import convertNumberToEmoji from '../../utils/convertNumberToEmoji'
 import { InlineKeyboard } from 'grammy'
 
 type ListExpenses = (expenses: Expense[], totalSum: string, skip: number) => List
@@ -12,7 +12,7 @@ type List = {
   keyboard: InlineKeyboard
 }
 
-const listExpenses: ListExpenses = (expenses, totalSum, skip) => {
+const listExpenses: ListExpenses = (expenses, totalSum) => {
   let resultString = '📊 Ваши траты:\n\n'
   const keyboard = new InlineKeyboard()
   expenses.forEach((expense: Expense, i) => {
