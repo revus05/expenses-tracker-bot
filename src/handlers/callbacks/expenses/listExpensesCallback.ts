@@ -5,19 +5,11 @@ import { step } from '../../../utils/init/config'
 import listExpenses from '../../../replies/expenses/listExpenses'
 import getTotalSum from '../../../queries/getTotalSum'
 import { InlineKeyboard } from 'grammy'
-import getCommand from '../../../utils/getCommand'
 
-type ListCallback = (ctx: MyContext) => Promise<void>
+type ListExpensesCallback = (ctx: MyContext) => Promise<void>
 
-const handleListCallback: ListCallback = async ctx => {
+const listExpensesCallback: ListExpensesCallback = async ctx => {
   if (!ctx.callbackQuery || !ctx.callbackQuery.data || !ctx.from) {
-    await ctx.reply('Error no data')
-    return
-  }
-
-  await ctx.answerCallbackQuery()
-  const command = getCommand(ctx.callbackQuery.data, 'list')
-  if (!command) {
     await ctx.reply('Error no data')
     return
   }
@@ -28,7 +20,7 @@ const handleListCallback: ListCallback = async ctx => {
     if (skip - step >= 0) {
       skip = skip - step
     }
-  } else {
+  } else if (ctx.callbackQuery.data.includes('Next')) {
     skip = skip + step
   }
   ctx.session.skip = skip
@@ -61,23 +53,30 @@ const handleListCallback: ListCallback = async ctx => {
   if (totalExpenses > step) {
     paginationKeyboard = new InlineKeyboard()
     if (skip - step >= 0) {
-      paginationKeyboard.text(`<< Предыдущие ${step}`, `listPrev`)
+      paginationKeyboard.text(`<< Предыдущие ${step}`, `listExpensesPrev`)
     }
     if (skip + step < totalExpenses) {
       paginationKeyboard.text(
         totalExpenses - skip - step > step ? `Следущие ${step} >>` : `Последние ${totalExpenses - skip - step} >>`,
-        `listNext`,
+        `listExpensesNext`,
       )
     }
   }
+
+  const backToMenuKeyboard = new InlineKeyboard()
+  backToMenuKeyboard.text('<< В Меню', 'mainMenu')
 
   let reply = listExpenses(expenses, await getTotalSum(ctx.from.id), skip)
   await ctx.callbackQuery.message?.editText(reply.expenses, {
     parse_mode: 'HTML',
     reply_markup: paginationKeyboard
-      ? new InlineKeyboard([...reply.keyboard.inline_keyboard, ...paginationKeyboard.inline_keyboard])
-      : reply.keyboard,
+      ? new InlineKeyboard([
+          ...reply.keyboard.inline_keyboard,
+          ...paginationKeyboard.inline_keyboard,
+          ...backToMenuKeyboard.inline_keyboard,
+        ])
+      : new InlineKeyboard([...reply.keyboard.inline_keyboard, ...backToMenuKeyboard.inline_keyboard]),
   })
 }
 
-export default handleListCallback
+export default listExpensesCallback

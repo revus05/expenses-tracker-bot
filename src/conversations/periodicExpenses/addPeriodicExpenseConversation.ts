@@ -1,7 +1,6 @@
 import { Conversation } from '@grammyjs/conversations'
 import { MyContext } from '../../utils/init/bot'
 import prisma from '../../../prisma/client/prismaClient'
-import handlePeriodicExpensesCommand from '../../handlers/handlePeriodicExpensesCommand'
 
 type AddPeriodicExpenseConversation = (conversation: Conversation<MyContext>, ctx: MyContext) => Promise<void>
 
@@ -31,8 +30,6 @@ const addPeriodicExpenseConversation: AddPeriodicExpenseConversation = async (co
   }
 
   await ctx.reply('Регулярная трата успешно создана!')
-
-  await handlePeriodicExpensesCommand(ctx)
 }
 
 export default addPeriodicExpenseConversation

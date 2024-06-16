@@ -5,9 +5,9 @@ import getCategoryText from '../../utils/getCategoryText'
 import convertNumberToEmoji from '../../utils/convertNumberToEmoji'
 import { InlineKeyboard } from 'grammy'
 
-type ListExpenses = (expenses: Expense[], totalSum: string, skip: number) => List
+type ListExpenses = (expenses: Expense[], totalSum: string, skip: number) => ExpensesList
 
-type List = {
+type ExpensesList = {
   expenses: string
   keyboard: InlineKeyboard
 }
@@ -15,7 +15,7 @@ type List = {
 const listExpenses: ListExpenses = (expenses, totalSum) => {
   let resultString = '📊 Ваши траты:\n\n'
   const keyboard = new InlineKeyboard()
-  expenses.forEach((expense: Expense, i) => {
+  expenses.forEach((expense, i) => {
     resultString +=
       `${convertNumberToEmoji(i + 1)} <b>Трата</b>\n` +
       `💰 <b>Сумма:</b> ${getMoneyWithSymbol(expense.currency, expense.sum)}\n` +

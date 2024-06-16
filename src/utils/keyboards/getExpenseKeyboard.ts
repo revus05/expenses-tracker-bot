@@ -15,8 +15,8 @@ const getExpenseKeyboard: GetExpenseKeyboard = (expenseId, messageId, category, 
   keyboard
     .text(`📝 ${description ? 'Изменить' : 'Добавить'} описание`, `updateExpenseDescription_${expenseId}_${messageId}`)
     .row()
-  keyboard.text('❌ Удалить трату', `deleteExpense_${expenseId}|listPrev`).row()
-  keyboard.text('<< Назад к списку', `listPrev`)
+  keyboard.text('❌ Удалить трату', `deleteExpense_${expenseId}|listExpenses`).row()
+  keyboard.text('<< Назад к списку', `listExpenses`)
 
   return keyboard
 }

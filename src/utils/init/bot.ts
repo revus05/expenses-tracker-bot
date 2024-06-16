@@ -17,7 +17,7 @@ export type MyContext = HydrateFlavor<Context> & SessionFlavor<Session> & Conver
 
 const bot = new Bot<MyContext>(process.env.BOT_TOKEN || '')
 bot.use(hydrate())
-bot.use(session({ initial: () => ({ expenseId: 0 }) }))
+bot.use(session({ initial: () => ({ expenseId: 0, skip: 0 }) }))
 bot.use(conversations())
 
 bot.use(createConversation(updateExpenseSumConversation))

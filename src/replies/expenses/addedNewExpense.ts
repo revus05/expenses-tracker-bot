@@ -11,8 +11,7 @@ const getAddedNewExpenseText: GetAddedNewExpenseText = async (expense: Expense) 
     `Добавлено: ${getMoneyWithSymbol(expense.currency, expense.sum)} в кат. ${getCategoryText(expense.category)}\n\n` +
     `Статистика за последний месяц:\n` +
     `${getCategoryText(expense.category)}: ${await getTotalSum(expense.userId, expense.category)}\n` +
-    `💰 Общие расходы: ${await getTotalSum(expense.userId)}\n\n` +
-    `/list - Вывести список всех трат`
+    `💰 Общие расходы: ${await getTotalSum(expense.userId)}`
   )
 }
 

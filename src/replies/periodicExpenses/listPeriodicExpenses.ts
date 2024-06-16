@@ -2,11 +2,17 @@ import convertNumberToEmoji from '../../utils/convertNumberToEmoji'
 import getMoneyWithSymbol from '../../utils/getMoneyWithSymbol'
 import getCategoryText from '../../utils/getCategoryText'
 import { PeriodicExpense } from '@prisma/client'
+import { InlineKeyboard } from 'grammy'
 
-type ListPeriodicExpenses = (periodicExpenses: PeriodicExpense[]) => Promise<string>
+type PeriodicExpenseList = {
+  periodicExpenses: string
+  keyboard: InlineKeyboard
+}
+type ListPeriodicExpenses = (periodicExpenses: PeriodicExpense[]) => PeriodicExpenseList
 
-const listPeriodicExpenses: ListPeriodicExpenses = async periodicExpenses => {
+const listPeriodicExpenses: ListPeriodicExpenses = periodicExpenses => {
   let resultString = `Регулярные траты:\n`
+  const keyboard = new InlineKeyboard()
   periodicExpenses.forEach((periodicExpense, i) => {
     resultString +=
       `${convertNumberToEmoji(i + 1)} ${periodicExpense.name}\n` +
@@ -15,9 +21,14 @@ const listPeriodicExpenses: ListPeriodicExpenses = async periodicExpenses => {
       `🏷 <b>Последний месяц: ❌ Не оплачено</b> \n` +
       `📝 <b>Описание:</b> ${periodicExpense.description ? periodicExpense.description : `<i>Нет описания</i>`}\n` +
       `📅 <b>Период:</b> ${periodicExpense.periodDays} дней\n\n`
+
+    keyboard.text(`${i + 1}`, `periodicExpense_${periodicExpense.id}`)
   })
 
-  return resultString
+  return {
+    periodicExpenses: resultString,
+    keyboard,
+  }
 }
 
 export default listPeriodicExpenses

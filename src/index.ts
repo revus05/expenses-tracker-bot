@@ -3,22 +3,13 @@ import handleStartCommand from './handlers/handleStartCommand'
 import handleTextMessage from './handlers/handleTextMessage'
 import handleVoiceMessage from './handlers/handleVoiceMessage'
 import handleInlineKeyboardClick from './handlers/handleInlineKeyboardClick'
-import handleSetPreferredCurrencyCommand from './handlers/handleSetPreferredCurrencyCommand'
 import setBotCommands from './utils/init/setBotCommands'
-import handleListCommand from './handlers/handleListCommand'
-import handlePeriodicExpensesCommand from './handlers/handlePeriodicExpensesCommand'
 
 setBotCommands().then(() => {
   console.log('Команды бота добавлены')
 })
 
 bot.command('start', handleStartCommand)
-
-bot.command('set_preferred_currency', handleSetPreferredCurrencyCommand)
-
-bot.command('list', handleListCommand)
-
-bot.command('periodic_expenses', handlePeriodicExpensesCommand)
 
 bot.on('message:text', ctx => handleTextMessage(ctx))
 
